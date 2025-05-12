@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncwu.studygo.mapper.ReservationMapper">
+    <!-- 基础映射结果集 -->
+    <resultMap id="BaseResultMap" type="com.ncwu.studygo.entity.Reservation">
+        <id column="id" property="id"/>
+        <result column="userId" property="userId"/>
+        <result column="roomId" property="roomId"/>
+        <result column="seatId" property="seatId"/>
+        <result column="seatNumber" property="seatNumber"/>
+        <result column="roomName" property="roomName"/>
+        <result column="date" property="date"/>
+        <result column="days" property="days"/>
+        <result column="status" property="status"/>
+        <result column="createTime" property="createTime"/>
+        <result column="updateTime" property="updateTime"/>
+    </resultMap>
+    
+    <!-- 检查预约日期重叠 -->
+    <select id="checkDateOverlap" resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM reservation
+        WHERE seatId = #{seatId}
+        AND status IN (0, 1)
+        AND (
+            (date &lt;= #{startDate} AND DATE_ADD(date, INTERVAL days-1 DAY) &gt;= #{startDate})
+            OR (date &lt;= #{endDate} AND DATE_ADD(date, INTERVAL days-1 DAY) &gt;= #{endDate})
+            OR (date &gt;= #{startDate} AND DATE_ADD(date, INTERVAL days-1 DAY) &lt;= #{endDate})
+            OR (date &lt;= #{startDate} AND DATE_ADD(date, INTERVAL days-1 DAY) &gt;= #{endDate})
+        )
+    </select>
+</mapper> 

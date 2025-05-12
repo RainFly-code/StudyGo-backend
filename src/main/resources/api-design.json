@@ -1,0 +1,428 @@
+{
+  "projectName": "StudyGo自习室预约系统",
+  "description": "基于Spring Boot、MyBatis Plus和MySQL的自习室预约管理系统",
+  "modules": [
+    {
+      "name": "用户管理模块",
+      "description": "负责用户注册、登录、个人信息管理以及管理员对用户的管理",
+      "features": [
+        "用户注册与登录",
+        "个人信息管理",
+        "用户管理（管理员）"
+      ],
+      "apis": [
+        {
+          "path": "/api/user/register",
+          "method": "POST",
+          "description": "用户注册",
+          "requestParams": {
+            "username": "用户名",
+            "password": "密码",
+            "email": "邮箱",
+            "phone": "手机号"
+          }
+        },
+        {
+          "path": "/api/user/login",
+          "method": "POST",
+          "description": "用户登录",
+          "requestParams": {
+            "username": "用户名",
+            "password": "密码"
+          }
+        },
+        {
+          "path": "/api/user/info",
+          "method": "GET",
+          "description": "获取用户信息"
+        },
+        {
+          "path": "/api/user/update",
+          "method": "PUT",
+          "description": "更新用户信息",
+          "requestParams": {
+            "email": "邮箱（可选）",
+            "phone": "手机号（可选）",
+            "gender": "性别（可选）",
+            "age": "年龄（可选）"
+          }
+        },
+        {
+          "path": "/api/user/password",
+          "method": "PUT",
+          "description": "修改密码",
+          "requestParams": {
+            "oldPassword": "旧密码",
+            "newPassword": "新密码"
+          }
+        },
+        {
+          "path": "/api/admin/user/list",
+          "method": "GET",
+          "description": "管理员获取用户列表",
+          "requestParams": {
+            "page": "页码",
+            "size": "每页数量",
+            "keyword": "关键词（可选）"
+          }
+        },
+        {
+          "path": "/api/admin/user/{id}",
+          "method": "GET",
+          "description": "管理员获取用户详情"
+        },
+        {
+          "path": "/api/admin/user/{id}",
+          "method": "PUT",
+          "description": "管理员更新用户信息"
+        },
+        {
+          "path": "/api/admin/user/{id}",
+          "method": "DELETE",
+          "description": "管理员删除用户"
+        },
+        {
+          "path": "/api/admin/user/add",
+          "method": "POST",
+          "description": "管理员添加用户"
+        }
+      ]
+    },
+    {
+      "name": "自习室管理模块",
+      "description": "负责自习室信息管理、座位管理以及自习室查询功能",
+      "features": [
+        "自习室信息管理",
+        "座位管理",
+        "自习室查询",
+        "模糊查询自习室"
+      ],
+      "apis": [
+        {
+          "path": "/api/studyroom/list",
+          "method": "GET",
+          "description": "获取自习室列表",
+          "requestParams": {
+            "page": "页码",
+            "size": "每页数量",
+            "status": "状态（可选）"
+          }
+        },
+        {
+          "path": "/api/studyroom/{id}",
+          "method": "GET",
+          "description": "获取自习室详情"
+        },
+        {
+          "path": "/api/studyroom/search",
+          "method": "GET",
+          "description": "模糊查询自习室",
+          "requestParams": {
+            "keyword": "关键词",
+            "page": "页码",
+            "size": "每页数量"
+          }
+        },
+        {
+          "path": "/api/studyroom/{id}/seats",
+          "method": "GET",
+          "description": "获取自习室座位列表",
+          "requestParams": {
+            "date": "日期（可选）",
+            "status": "状态（可选）"
+          }
+        },
+        {
+          "path": "/api/admin/studyroom/add",
+          "method": "POST",
+          "description": "添加自习室",
+          "requestParams": {
+            "name": "自习室名称",
+            "capacity": "容量",
+            "description": "描述（可选）",
+            "openTime": "开放时间",
+            "closeTime": "关闭时间"
+          }
+        },
+        {
+          "path": "/api/admin/studyroom/{id}",
+          "method": "PUT",
+          "description": "更新自习室信息"
+        },
+        {
+          "path": "/api/admin/studyroom/{id}",
+          "method": "DELETE",
+          "description": "删除自习室"
+        },
+        {
+          "path": "/api/admin/studyroom/{id}/status",
+          "method": "PUT",
+          "description": "更新自习室状态",
+          "requestParams": {
+            "status": "状态 0:可用 1:维护中"
+          }
+        },
+        {
+          "path": "/api/admin/seat/add",
+          "method": "POST",
+          "description": "添加座位",
+          "requestParams": {
+            "roomId": "自习室ID",
+            "seatNumber": "座位编号",
+            "status": "状态 0:可用 1:已预约 2:维护中"
+          }
+        },
+        {
+          "path": "/api/admin/seat/{id}",
+          "method": "PUT",
+          "description": "更新座位信息"
+        },
+        {
+          "path": "/api/admin/seat/{id}/status",
+          "method": "PUT",
+          "description": "更新座位状态",
+          "requestParams": {
+            "status": "状态 0:可用 1:已预约 2:维护中"
+          }
+        },
+        {
+          "path": "/api/admin/seat/batch",
+          "method": "POST",
+          "description": "批量设置座位信息",
+          "requestParams": {
+            "roomId": "自习室ID",
+            "startNumber": "起始编号",
+            "endNumber": "结束编号",
+            "status": "状态 0:可用 1:已预约 2:维护中"
+          }
+        }
+      ]
+    },
+    {
+      "name": "预约管理模块",
+      "description": "负责座位预约、查看历史预约、取消预约以及管理员对预约的管理",
+      "features": [
+        "座位预约",
+        "查看历史预约",
+        "取消预约",
+        "预约管理（管理员）"
+      ],
+      "apis": [
+        {
+          "path": "/api/reservation/add",
+          "method": "POST",
+          "description": "预约座位",
+          "requestParams": {
+            "seatId": "座位ID",
+            "date": "预约开始日期",
+            "days": "预约天数"
+          }
+        },
+        {
+          "path": "/api/reservation/list",
+          "method": "GET",
+          "description": "获取个人预约列表",
+          "requestParams": {
+            "page": "页码",
+            "size": "每页数量",
+            "status": "状态（可选）"
+          }
+        },
+        {
+          "path": "/api/reservation/{id}",
+          "method": "GET",
+          "description": "获取预约详情"
+        },
+        {
+          "path": "/api/reservation/{id}/cancel",
+          "method": "PUT",
+          "description": "取消预约"
+        },
+        {
+          "path": "/api/admin/reservation/list",
+          "method": "GET",
+          "description": "管理员获取预约列表",
+          "requestParams": {
+            "page": "页码",
+            "size": "每页数量",
+            "userId": "用户ID（可选）",
+            "roomId": "自习室ID（可选）",
+            "status": "状态（可选）",
+            "startDate": "开始日期（可选）",
+            "endDate": "结束日期（可选）"
+          }
+        },
+        {
+          "path": "/api/admin/reservation/{id}",
+          "method": "PUT",
+          "description": "管理员处理预约",
+          "requestParams": {
+            "status": "状态 0:待审核 1:已通过 2:已拒绝 3:已取消"
+          }
+        },
+        {
+          "path": "/api/admin/reservation/export",
+          "method": "GET",
+          "description": "导出预约记录",
+          "requestParams": {
+            "startDate": "开始日期（可选）",
+            "endDate": "结束日期（可选）",
+            "roomId": "自习室ID（可选）",
+            "status": "状态（可选）"
+          }
+        }
+      ]
+    },
+    {
+      "name": "公告管理模块",
+      "description": "负责公告的发布、查看以及管理",
+      "features": [
+        "查看公告",
+        "公告管理（管理员）"
+      ],
+      "apis": [
+        {
+          "path": "/api/announcement/list",
+          "method": "GET",
+          "description": "获取公告列表",
+          "requestParams": {
+            "page": "页码",
+            "size": "每页数量"
+          }
+        },
+        {
+          "path": "/api/announcement/{id}",
+          "method": "GET",
+          "description": "获取公告详情"
+        },
+        {
+          "path": "/api/admin/announcement/add",
+          "method": "POST",
+          "description": "发布公告",
+          "requestParams": {
+            "title": "公告标题",
+            "content": "公告内容",
+            "status": "状态 0:已下架 1:已发布"
+          }
+        },
+        {
+          "path": "/api/admin/announcement/{id}",
+          "method": "PUT",
+          "description": "更新公告",
+          "requestParams": {
+            "title": "公告标题（可选）",
+            "content": "公告内容（可选）",
+            "status": "状态（可选）"
+          }
+        },
+        {
+          "path": "/api/admin/announcement/{id}",
+          "method": "DELETE",
+          "description": "删除公告"
+        },
+        {
+          "path": "/api/admin/announcement/{id}/status",
+          "method": "PUT",
+          "description": "更新公告状态",
+          "requestParams": {
+            "status": "状态 0:已下架 1:已发布"
+          }
+        }
+      ]
+    },
+    {
+      "name": "反馈管理模块",
+      "description": "负责用户反馈的提交、查看以及管理员对反馈的处理",
+      "features": [
+        "提交反馈",
+        "查看反馈状态",
+        "反馈管理（管理员）"
+      ],
+      "apis": [
+        {
+          "path": "/api/feedback/add",
+          "method": "POST",
+          "description": "提交反馈",
+          "requestParams": {
+            "type": "反馈类型 1:建议 2:投诉 3:故障报修",
+            "title": "反馈标题",
+            "content": "反馈内容"
+          }
+        },
+        {
+          "path": "/api/feedback/list",
+          "method": "GET",
+          "description": "获取个人反馈列表",
+          "requestParams": {
+            "page": "页码",
+            "size": "每页数量",
+            "status": "状态（可选）"
+          }
+        },
+        {
+          "path": "/api/feedback/{id}",
+          "method": "GET",
+          "description": "获取反馈详情"
+        },
+        {
+          "path": "/api/admin/feedback/list",
+          "method": "GET",
+          "description": "管理员获取反馈列表",
+          "requestParams": {
+            "page": "页码",
+            "size": "每页数量",
+            "type": "反馈类型（可选）",
+            "status": "状态（可选）"
+          }
+        },
+        {
+          "path": "/api/admin/feedback/{id}",
+          "method": "PUT",
+          "description": "管理员处理反馈",
+          "requestParams": {
+            "status": "状态 0:待处理 1:处理中 2:已处理",
+            "reply": "回复内容"
+          }
+        }
+      ]
+    }
+  ],
+  "commonComponents": [
+    {
+      "name": "全局异常处理",
+      "class": "com.ncwu.studygo.common.exception.GlobalExceptionHandler",
+      "description": "统一处理系统异常，返回规范的错误信息"
+    },
+    {
+      "name": "统一响应结果",
+      "class": "com.ncwu.studygo.common.result.Result",
+      "description": "统一API响应格式，包含状态码、消息和数据"
+    },
+    {
+      "name": "JWT认证",
+      "class": "com.ncwu.studygo.util.JwtUtil",
+      "description": "基于JWT的用户认证机制，生成和验证token"
+    },
+    {
+      "name": "权限拦截器",
+      "class": "com.ncwu.studygo.config.interceptor.AuthInterceptor",
+      "description": "拦截请求，验证用户权限"
+    },
+    {
+      "name": "MyBatis Plus配置",
+      "class": "com.ncwu.studygo.config.MybatisPlusConfig",
+      "description": "配置MyBatis Plus，包括分页插件等"
+    }
+  ],
+  "securityMechanism": {
+    "authentication": "基于JWT的认证机制",
+    "authorization": "基于角色的权限控制，区分普通用户和管理员权限",
+    "dataValidation": "使用Spring Validation进行请求参数验证"
+  },
+  "businessRules": [
+    "同一时间段的座位仅能被一个用户预约",
+    "用户只能取消未开始的预约",
+    "管理员可以管理所有用户、自习室、座位、预约、公告和反馈",
+    "普通用户只能查看和管理自己的信息和预约"
+  ]
+}

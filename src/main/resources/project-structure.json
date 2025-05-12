@@ -1,0 +1,335 @@
+{
+  "projectName": "StudyGo自习室预约系统",
+  "description": "基于Spring Boot、MyBatis Plus和MySQL的自习室预约管理系统",
+  "modules": [
+    {
+      "name": "用户管理模块",
+      "packages": [
+        "com.ncwu.studygo.entity.User",
+        "com.ncwu.studygo.mapper.UserMapper",
+        "com.ncwu.studygo.service.UserService",
+        "com.ncwu.studygo.service.impl.UserServiceImpl",
+        "com.ncwu.studygo.controller.UserController"
+      ],
+      "features": [
+        "用户注册",
+        "用户登录",
+        "个人信息管理",
+        "用户管理（管理员）"
+      ],
+      "apis": [
+        {
+          "path": "/api/user/register",
+          "method": "POST",
+          "description": "用户注册"
+        },
+        {
+          "path": "/api/user/login",
+          "method": "POST",
+          "description": "用户登录"
+        },
+        {
+          "path": "/api/user/info",
+          "method": "GET",
+          "description": "获取用户信息"
+        },
+        {
+          "path": "/api/user/update",
+          "method": "PUT",
+          "description": "更新用户信息"
+        },
+        {
+          "path": "/api/admin/user/list",
+          "method": "GET",
+          "description": "管理员获取用户列表"
+        },
+        {
+          "path": "/api/admin/user/{id}",
+          "method": "GET",
+          "description": "管理员获取用户详情"
+        },
+        {
+          "path": "/api/admin/user/{id}",
+          "method": "PUT",
+          "description": "管理员更新用户信息"
+        },
+        {
+          "path": "/api/admin/user/{id}",
+          "method": "DELETE",
+          "description": "管理员删除用户"
+        }
+      ]
+    },
+    {
+      "name": "自习室管理模块",
+      "packages": [
+        "com.ncwu.studygo.entity.StudyRoom",
+        "com.ncwu.studygo.entity.Seat",
+        "com.ncwu.studygo.mapper.StudyRoomMapper",
+        "com.ncwu.studygo.mapper.SeatMapper",
+        "com.ncwu.studygo.service.StudyRoomService",
+        "com.ncwu.studygo.service.SeatService",
+        "com.ncwu.studygo.service.impl.StudyRoomServiceImpl",
+        "com.ncwu.studygo.service.impl.SeatServiceImpl",
+        "com.ncwu.studygo.controller.StudyRoomController",
+        "com.ncwu.studygo.controller.SeatController"
+      ],
+      "features": [
+        "自习室信息管理",
+        "座位管理",
+        "自习室查询",
+        "模糊查询自习室"
+      ],
+      "apis": [
+        {
+          "path": "/api/studyroom/list",
+          "method": "GET",
+          "description": "获取自习室列表"
+        },
+        {
+          "path": "/api/studyroom/{id}",
+          "method": "GET",
+          "description": "获取自习室详情"
+        },
+        {
+          "path": "/api/studyroom/search",
+          "method": "GET",
+          "description": "模糊查询自习室"
+        },
+        {
+          "path": "/api/studyroom/{id}/seats",
+          "method": "GET",
+          "description": "获取自习室座位列表"
+        },
+        {
+          "path": "/api/admin/studyroom/add",
+          "method": "POST",
+          "description": "添加自习室"
+        },
+        {
+          "path": "/api/admin/studyroom/{id}",
+          "method": "PUT",
+          "description": "更新自习室信息"
+        },
+        {
+          "path": "/api/admin/studyroom/{id}",
+          "method": "DELETE",
+          "description": "删除自习室"
+        },
+        {
+          "path": "/api/admin/seat/add",
+          "method": "POST",
+          "description": "添加座位"
+        },
+        {
+          "path": "/api/admin/seat/{id}",
+          "method": "PUT",
+          "description": "更新座位信息"
+        },
+        {
+          "path": "/api/admin/seat/batch",
+          "method": "POST",
+          "description": "批量设置座位信息"
+        }
+      ]
+    },
+    {
+      "name": "预约管理模块",
+      "packages": [
+        "com.ncwu.studygo.entity.Reservation",
+        "com.ncwu.studygo.mapper.ReservationMapper",
+        "com.ncwu.studygo.service.ReservationService",
+        "com.ncwu.studygo.service.impl.ReservationServiceImpl",
+        "com.ncwu.studygo.controller.ReservationController"
+      ],
+      "features": [
+        "座位预约",
+        "查看历史预约",
+        "取消预约",
+        "预约管理（管理员）"
+      ],
+      "apis": [
+        {
+          "path": "/api/reservation/add",
+          "method": "POST",
+          "description": "预约座位"
+        },
+        {
+          "path": "/api/reservation/list",
+          "method": "GET",
+          "description": "获取个人预约列表"
+        },
+        {
+          "path": "/api/reservation/{id}",
+          "method": "GET",
+          "description": "获取预约详情"
+        },
+        {
+          "path": "/api/reservation/{id}/cancel",
+          "method": "PUT",
+          "description": "取消预约"
+        },
+        {
+          "path": "/api/admin/reservation/list",
+          "method": "GET",
+          "description": "管理员获取预约列表"
+        },
+        {
+          "path": "/api/admin/reservation/{id}",
+          "method": "PUT",
+          "description": "管理员处理预约"
+        },
+        {
+          "path": "/api/admin/reservation/export",
+          "method": "GET",
+          "description": "导出预约记录"
+        }
+      ]
+    },
+    {
+      "name": "公告管理模块",
+      "packages": [
+        "com.ncwu.studygo.entity.Announcement",
+        "com.ncwu.studygo.mapper.AnnouncementMapper",
+        "com.ncwu.studygo.service.AnnouncementService",
+        "com.ncwu.studygo.service.impl.AnnouncementServiceImpl",
+        "com.ncwu.studygo.controller.AnnouncementController"
+      ],
+      "features": [
+        "查看公告",
+        "公告管理（管理员）"
+      ],
+      "apis": [
+        {
+          "path": "/api/announcement/list",
+          "method": "GET",
+          "description": "获取公告列表"
+        },
+        {
+          "path": "/api/announcement/{id}",
+          "method": "GET",
+          "description": "获取公告详情"
+        },
+        {
+          "path": "/api/admin/announcement/add",
+          "method": "POST",
+          "description": "发布公告"
+        },
+        {
+          "path": "/api/admin/announcement/{id}",
+          "method": "PUT",
+          "description": "更新公告"
+        },
+        {
+          "path": "/api/admin/announcement/{id}",
+          "method": "DELETE",
+          "description": "删除公告"
+        }
+      ]
+    },
+    {
+      "name": "反馈管理模块",
+      "packages": [
+        "com.ncwu.studygo.entity.Feedback",
+        "com.ncwu.studygo.mapper.FeedbackMapper",
+        "com.ncwu.studygo.service.FeedbackService",
+        "com.ncwu.studygo.service.impl.FeedbackServiceImpl",
+        "com.ncwu.studygo.controller.FeedbackController"
+      ],
+      "features": [
+        "提交反馈",
+        "查看反馈状态",
+        "反馈管理（管理员）"
+      ],
+      "apis": [
+        {
+          "path": "/api/feedback/add",
+          "method": "POST",
+          "description": "提交反馈"
+        },
+        {
+          "path": "/api/feedback/list",
+          "method": "GET",
+          "description": "获取个人反馈列表"
+        },
+        {
+          "path": "/api/feedback/{id}",
+          "method": "GET",
+          "description": "获取反馈详情"
+        },
+        {
+          "path": "/api/admin/feedback/list",
+          "method": "GET",
+          "description": "管理员获取反馈列表"
+        },
+        {
+          "path": "/api/admin/feedback/{id}",
+          "method": "PUT",
+          "description": "管理员处理反馈"
+        }
+      ]
+    },
+    {
+      "name": "公共模块",
+      "packages": [
+        "com.ncwu.studygo.config",
+        "com.ncwu.studygo.common",
+        "com.ncwu.studygo.util"
+      ],
+      "components": [
+        {
+          "name": "全局异常处理",
+          "class": "com.ncwu.studygo.common.exception.GlobalExceptionHandler"
+        },
+        {
+          "name": "统一响应结果",
+          "class": "com.ncwu.studygo.common.result.Result"
+        },
+        {
+          "name": "JWT工具类",
+          "class": "com.ncwu.studygo.util.JwtUtil"
+        },
+        {
+          "name": "权限拦截器",
+          "class": "com.ncwu.studygo.config.interceptor.AuthInterceptor"
+        },
+        {
+          "name": "MyBatis Plus配置",
+          "class": "com.ncwu.studygo.config.MybatisPlusConfig"
+        }
+      ]
+    }
+  ],
+  "databaseTables": [
+    {
+      "name": "user",
+      "description": "用户表",
+      "entityClass": "com.ncwu.studygo.entity.User"
+    },
+    {
+      "name": "study_room",
+      "description": "自习室表",
+      "entityClass": "com.ncwu.studygo.entity.StudyRoom"
+    },
+    {
+      "name": "seat",
+      "description": "座位表",
+      "entityClass": "com.ncwu.studygo.entity.Seat"
+    },
+    {
+      "name": "reservation",
+      "description": "预约表",
+      "entityClass": "com.ncwu.studygo.entity.Reservation"
+    },
+    {
+      "name": "announcement",
+      "description": "公告表",
+      "entityClass": "com.ncwu.studygo.entity.Announcement"
+    },
+    {
+      "name": "feedback",
+      "description": "反馈表",
+      "entityClass": "com.ncwu.studygo.entity.Feedback"
+    }
+  ]
+}
